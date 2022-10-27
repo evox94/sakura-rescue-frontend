@@ -1,11 +1,16 @@
 import SakuraRescue from './features/SakuraRescue'
-import { Center } from '@chakra-ui/react'
+import { Box, Center, Container } from '@chakra-ui/react'
+import SakuraHighScore from './features/SakuraHighScore'
 
 function App() {
   return (
-    <Center>
-      <SakuraRescue/>
-    </Center>
+    <>
+      <Box textAlign="right">
+        <SakuraHighScore />
+      </Box>
+      <Center>
+        <SakuraRescue />
+      </Center></>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Box, Button, Container, Heading, HStack, Image, Input, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Heading, HStack, Image, Input, VStack } from '@chakra-ui/react';
 import { useState } from 'react'
 import sakura_danger from './sakura_danger.png'
 import { SakuraDangerProps } from './types'

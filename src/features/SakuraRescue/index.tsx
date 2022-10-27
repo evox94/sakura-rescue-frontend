@@ -4,6 +4,7 @@ import './style.css'
 import { Alert, AlertIcon, Spinner, VStack } from '@chakra-ui/react';
 import SaveCounter from './SaveCounter';
 import { useSakuraRescue } from './hooks';
+import Loadable from '../../components/Loadable';
 
 export default function SakuraRescue() {
   const { username, count, error, isLoading, saveSakuraHandler, isSafe } = useSakuraRescue();
@@ -13,12 +14,9 @@ export default function SakuraRescue() {
   return (
     <VStack>
       {isSafe ? <SakuraSafe/> : <SakuraDanger username={username} attemptSavingHandler={saveSakuraHandler} disableButton={isLoading} /> }
-      {isLoading ? <Spinner /> : !errorExists ? username && <SaveCounter username={username} count={count} /> : <>
-        <Alert status='error'>
-          <AlertIcon />
-          {error}
-        </Alert>
-      </>}
+      <Loadable error={error} isLoading={isLoading}>
+        {username && <SaveCounter username={username} count={count}/>}
+      </Loadable>
     </VStack>
   )
 }
