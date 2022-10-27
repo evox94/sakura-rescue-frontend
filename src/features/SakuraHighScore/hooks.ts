@@ -28,7 +28,6 @@ export const useHighScores = (shouldFetch: boolean) =>{
 
 function getHighScorers(): Promise<Array<HighScore>>{
     return new Promise((resolve, reject) => {
-        // setTimeout(() => resolve([{name:"smiki", count:60,}, {name:"Sale", count: 50}]), 2000);
-        setTimeout(() => reject("Whoops!"), 2000);
+        setTimeout(() => resolve([{name:"smiki", count:60,}, {name:"Sale", count: 50}]), 2000);
     })
 }

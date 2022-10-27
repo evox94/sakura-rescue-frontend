@@ -10,7 +10,8 @@ function App() {
       </Box>
       <Center>
         <SakuraRescue />
-      </Center></>
+      </Center>
+    </>
   )
 }
 

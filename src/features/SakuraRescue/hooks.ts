@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { MissionReport } from "./types";
 
 export const useSakuraRescue = () =>{
     const [username, setUsername] = useLocalStorage<string>('username', '');
@@ -7,17 +8,23 @@ export const useSakuraRescue = () =>{
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isSafe, setIsSafe] = useState(true);
+    const [missionReport, setMissionReport] = useState<MissionReport | undefined>(undefined);
 
     const saveSakuraHandlerFunc = (newUsername: string) => {
         if (newUsername != username) {
             setUsername(newUsername);
         }
         setError(undefined);
+        setMissionReport(undefined);
         setLoading(true);
         getCountForUserFromServer(username, count)
         .then(c => {
             setCount(c);
             setIsSafe(true);
+            setMissionReport({
+                jounin: "jounin-test",
+                genins: ["genin1", "genin2"]
+            })
         }
         )
         .catch(error => setError("Saving sakura failed!"))
@@ -50,7 +57,9 @@ export const useSakuraRescue = () =>{
         isLoading,
         error,
         saveSakuraHandler,
-        isSafe
+        isSafe,
+        missionReport,
+        clearMissionReport: () => setMissionReport(undefined)
     }
 }
 
