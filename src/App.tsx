@@ -1,25 +1,16 @@
-import SakuraRescue from './features/SakuraRescue'
-import { Box, Center, Container, Tag, Tooltip } from '@chakra-ui/react'
-import SakuraHighScore from './features/SakuraHighScore'
-import { useState } from 'react'
+import { useCallback } from 'react'
+import { useLocalStorage } from 'usehooks-ts'
 import './App.css'
+import Intro from './features/Intro'
+import MainTest from './features/MainTest'
 
 function App() {
-  const [egg, setEgg] = useState(false);
+  const [introPassed, setIntroPassed] = useLocalStorage<boolean>("introPassed", false)
+
+  const continueHandler = useCallback(() => setIntroPassed(true), []);
+
   return (
-    <>
-      <Box textAlign="right">
-        <SakuraHighScore />
-      </Box>
-      <Center>
-        <SakuraRescue />
-      </Center>
-      <Box className='footer' onMouseEnter={() => setEgg(true)} onMouseLeave={() => setEgg(false)}>
-        {egg &&<Tooltip label='"Dedicated to Sale"'>
-          &#9829;
-        </Tooltip>}
-      </Box>
-    </>
+    introPassed ? <MainTest /> : <Intro continueHandler={continueHandler} />
   )
 }
 
