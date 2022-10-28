@@ -1,7 +1,8 @@
 export type SakuraDangerProps = {
     username?: string
     attemptSavingHandler: (username: string) => void;
-    disableButton: boolean
+    disableButton: boolean,
+    count: number
 }
 
 export type CounterProps = {
@@ -16,5 +17,6 @@ export type MissionReportProps = {
 
 export type MissionReport = {
     jounin: string
-    genins : Array<string>
+    genin : Array<string>
+    success: boolean
 }

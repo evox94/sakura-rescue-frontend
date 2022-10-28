@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { fetchHighScores } from "../../lib/JouninClient";
 import { HighScore } from "./types";
 
 export const useHighScores = (shouldFetch: boolean) =>{
@@ -8,7 +9,6 @@ export const useHighScores = (shouldFetch: boolean) =>{
 
     useEffect(() => {
         if(shouldFetch){
-            console.log("fetching highscores");
             setError(undefined);
             setLoading(true)
             getHighScorers()
@@ -25,9 +25,7 @@ export const useHighScores = (shouldFetch: boolean) =>{
     }
 }
 
-
-function getHighScorers(): Promise<Array<HighScore>>{
-    return new Promise((resolve, reject) => {
-        setTimeout(() => resolve([{name:"smiki", count:60,}, {name:"Sale", count: 50}]), 2000);
-    })
+async function getHighScorers(): Promise<Array<HighScore>>{
+    var response = await fetchHighScores();
+    return response.values;
 }

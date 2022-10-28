@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     Alert,
     AlertDescription,
@@ -7,22 +6,29 @@ import {
     Box,
     Center,
     CloseButton,
+    Highlight,
     HStack,
     Tag,
-    useDisclosure,
     VStack,
 } from '@chakra-ui/react'
 import { MissionReportProps } from './types'
 
 export default function MissionReport(props: MissionReportProps) {
     const { report } = props;
+
+    const reportHeader = `Last mission report: ${report.success ? 'Sakura saved' : 'Sakura not saved :('}`
+    const highlightColor = report.success ? 'green.100' : 'red.100'
     return (
         <Alert status='info'>
             <VStack m="auto">
                 <Center>
                     <HStack>
                         <AlertIcon mr={0} />
-                        <AlertTitle>Last mission report</AlertTitle>
+                        <AlertTitle>
+                            <Highlight query={["Sakura saved", "Sakura not saved :("]} styles={{ px: '1', py: '1', bg: highlightColor }}>
+                                {reportHeader}
+                            </Highlight>
+                        </AlertTitle>
                     </HStack>
                 </Center>
                 <Box>
@@ -37,7 +43,7 @@ export default function MissionReport(props: MissionReportProps) {
                             <Box>
                                 <HStack>
                                     <span>Genin:</span>
-                                    {report.genins.map(x => <Tag key={x}>{x}</Tag>)}
+                                    {report.genin.map(x => <Tag key={x}>{x}</Tag>)}
                                 </HStack>
                             </Box>
                         </VStack>
@@ -45,11 +51,11 @@ export default function MissionReport(props: MissionReportProps) {
                 </Box>
             </VStack>
             <CloseButton
-                    alignSelf='flex-start'
-                    position='relative'
-                    right={-1}
-                    top={-1}
-                    onClick={props.clearMissionReport}/>
+                alignSelf='flex-start'
+                position='relative'
+                right={-1}
+                top={-1}
+                onClick={props.clearMissionReport} />
         </Alert>
     )
 }

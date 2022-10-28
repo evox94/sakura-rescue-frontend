@@ -27,7 +27,7 @@ export default function SakuraDanger(props: SakuraDangerProps) {
                 <Image src={sakura_danger} alt='Sakura is in danger!' className='sakura_image sakura_image_danger' />
             </Box>
             <VStack>
-                <Heading size="md">You have to save her</Heading>
+                <Heading size="md">You have to save her...{(props.count > 0) && 'again...'}</Heading>
                 <HStack>
                     <Input isInvalid={isInvalidUsername} placeholder='Your Name' onChange={handleUsernameChange} value={username} />
                     <Button colorScheme="teal" onClick={trySaveSakura} disabled={props.disableButton}>Save Sakura</Button>

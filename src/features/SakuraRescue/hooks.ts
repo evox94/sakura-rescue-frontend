@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import { fetchUsersScore, trySaveSakura } from "../../lib/JouninClient";
 import { MissionReport } from "./types";
 
 export const useSakuraRescue = () =>{
@@ -17,13 +18,14 @@ export const useSakuraRescue = () =>{
         setError(undefined);
         setMissionReport(undefined);
         setLoading(true);
-        getCountForUserFromServer(username, count)
-        .then(c => {
-            setCount(c);
-            setIsSafe(true);
+        trySaveSakura(newUsername)
+        .then(report => {
+            setCount(report.saveCount);
+            setIsSafe(report.success);
             setMissionReport({
-                jounin: "jounin-test",
-                genins: ["genin1", "genin2"]
+                jounin: report.jounin,
+                genin: report.genin,
+                success: report.success
             })
         }
         )
@@ -31,13 +33,13 @@ export const useSakuraRescue = () =>{
         .finally(() => setLoading(false));
     }
 
-    const saveSakuraHandler = useCallback(saveSakuraHandlerFunc, [username, count]);
+    const saveSakuraHandler = useCallback(saveSakuraHandlerFunc, [username]);
 
     useEffect(()=>{
         if(username){
             setError(undefined);
             setLoading(true);
-            getCountForUserFromServer(username, count)
+            getCountForUserFromServer(username)
             .then(c => setCount(c))
             .catch(error => setError("Something went wrong!"))
             .finally(() => setLoading(false));
@@ -64,8 +66,7 @@ export const useSakuraRescue = () =>{
 }
 
 
-function getCountForUserFromServer(username: string, num: number): Promise<number>{
-    return new Promise((resolve, reject) => {
-        setTimeout(() => resolve(num+1), 1000);
-    })
+async function getCountForUserFromServer(username: string): Promise<number>{
+    var result = await fetchUsersScore(username);
+    return result.value;
 }
