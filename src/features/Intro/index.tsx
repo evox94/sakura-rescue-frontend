@@ -1,13 +1,13 @@
 import { QuestionIcon } from '@chakra-ui/icons'
-import { Alert, AlertDescription, AlertIcon, AlertTitle, AspectRatio, Button, Center, Container, Heading, HStack, Input, VStack } from '@chakra-ui/react'
+import { Alert, AlertTitle, AspectRatio, Button, Center, Container, Heading, HStack, Input, VStack } from '@chakra-ui/react'
 import { useState } from 'react'
 import Success from './Success';
 import { IntroProps } from './types';
 
 const clips = {
-    intro: "https://www.youtube.com/embed/QhBnZ6NPOY0",
-    wrong: "https://www.youtube.com/embed/QdpdsXKqN4E",
-    right: "https://www.youtube.com/embed/tZanX1CFD5k"
+    intro: "https://www.youtube.com/embed/X5o4AKyAdtk",
+    wrong: "https://www.youtube.com/embed/JHBt19B_KpU",
+    right: "https://www.youtube.com/embed/iA2-OZxAawE"
 }
 
 export default function IntroTest(props: IntroProps) {
